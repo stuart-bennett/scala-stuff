@@ -81,7 +81,7 @@ object List {
 
   // Exercise 3.12 Reverse a list
   def reverse[A](l: List[A]): List[A] =
-    foldRight(l, Nil:List[A])((a,b) => Cons(a, Cons(a, Nil)))
+    foldLeft(l, List():List[A])((acc, x) => Cons(x, acc))
 
   def apply[A](as: A*): List[A] =
     if (as.isEmpty) Nil

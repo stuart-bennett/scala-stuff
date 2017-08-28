@@ -39,6 +39,11 @@ object List {
   def foldLeft2[A,B](as: List[A], z: B)(f: (B,A) => B): B =
     foldRight(as, (b:B) => b)((a,acc) => b => acc(f(b,a)))(z)
 
+  // Exercise 3,13 Fold Right using Fold Left
+  // As for doing FoldLeft with FoldRight, but the function we use to fold switches the left fold (B,A) order of params to the FoldRight order (A,B)
+  def foldRight2[A,B](as: List[A], z: B)(f: (A, B) => B): B =
+    foldLeft(as, (b:B) => b)((acc, a) => b => acc(f(a,b)))(z)
+
   def sum3(as: List[Int]): Int =
     foldLeft(as, 0)(_ + _)
 

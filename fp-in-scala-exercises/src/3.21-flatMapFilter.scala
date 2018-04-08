@@ -61,16 +61,17 @@ object List {
     return List(buf.toList: _*)
   }
 
-  // Exercise 3.20 Write a function that works like "map" except that the given function will return a list
-  // instead of a single result, and that list should be inserted into the final resulting list.
-  def flatMap_mine[A,B](as: List[A])(f: A => List[B]): List[B] =
-    foldRight(as, Nil:List[B])((a, acc) => append(f(a), acc))
-
-  // OFFICIAL SOLUTION
-  // What I did differently:
-  //   - I duplicated what concat was doing. Had forgotten I'd written concat so should have just used that.
   def flatMap[A,B](l: List[A])(f: A => List[B]): List[B] =
     concat(map(l)(f))
+
+  // Exercise 3.21 - Use flatMap to implement filter
+  def filter_flatMap_mine[A](l: List[A])(f: A => Boolean): List[A] =
+    flatMap(l)(a => if (f(a)) List(a) else Nil)
+
+  // OFFICAL SOLUTION
+  // They called it something else but body was the same :)
+  def filterViaFlatMap[A](l: List[A])(f: A => Boolean): List[A] =
+    flatMap(l)(a => if (f(a)) List(a) else Nil)
 
   def sum3(as: List[Int]): Int =
     foldLeft(as, 0)(_ + _)
